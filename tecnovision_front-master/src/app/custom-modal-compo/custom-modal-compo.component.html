@@ -1,0 +1,14 @@
+<div [class]="'modal-header p-4' + messageClass" #mymodal>
+  <h4 class="modal-title">{{ (messageClass.includes('danger')) ? "Error" : "Mensaje" }}</h4>
+</div>
+<div class="modal-body">
+  <article class="row py-2">
+    <div class="col-9">
+      <p>{{message}}</p>
+    </div>
+    <div class="col-3">
+      <button type="button" class="btn btn-primary"
+        (click)="activeModal.close('Close click'); goToHomePage();">Aceptar</button>
+    </div>
+  </article>
+</div>

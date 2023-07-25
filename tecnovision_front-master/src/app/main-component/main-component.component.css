@@ -1,0 +1,27 @@
+.submenu{
+    display: none;
+    position: absolute;
+    z-index: 4;
+}
+
+.menu li a {
+  color:white;
+}
+  
+.menu li:hover > ul{
+    display: inline-block;
+    
+}
+
+.menu{
+    position: relative;
+}
+
+.btn{
+    width: 125px;
+}
+
+.menu li a:hover{
+    color:#0275d8;
+    font-size: 17px;
+}

@@ -1,0 +1,15 @@
+DELIMITER $$
+CREATE PROCEDURE ORDER_LAST_ID(OUT order_id BIGINT)
+BEGIN
+  SELECT AUTO_INCREMENT into order_id FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_SCHEMA = 'tecnovision'
+	AND TABLE_NAME = 'orders';
+END $$
+DELIMITER ;
+
+CREATE TRIGGER update_product_stock 
+    AFTER INSERT ON order_details
+    FOR EACH ROW
+ UPDATE products
+ SET stock = stock - NEW.quantity
+ WHERE product_id = NEW.product_product_id;

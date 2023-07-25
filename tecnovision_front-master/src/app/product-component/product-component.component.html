@@ -1,0 +1,144 @@
+<div class="card-header text-center bg-dark text-white">{{title}}</div>
+<div *ngIf="!list" class="card-body bg-light" id="componentContainer">
+    <form enctype="multipart/form-data" id="productForm">
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Código</label>
+                <input type="number" min="1" [(ngModel)]="product.code" class="form-control form-control-sm" id="code"
+                    pattern="[0-9]*" (keypress)="preventNonNumericalInput($event)" step="1" name="code"
+                    placeholder="Ingrese el código del producto" required #code="ngModel" [readOnly]="!submitBtn" />
+                <small id="codeError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Descripción</label>
+                <input type="text" [(ngModel)]="product.description" class="form-control form-control-sm"
+                    id="description" name="description" placeholder="Ingrese la descripción del producto" required
+                    #description="ngModel" [readOnly]="!submitBtn">
+                <small id="descriptionError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Categoría</label>
+                <select id="categoryName" class="form-control form-control-sm" name="categoryName"
+                    [(ngModel)]="product.category.categoryId" [disabled]="!submitBtn" (change)="cleanComboboxError()">
+                    <option selected value="0">--SELECCIONE--</option>
+                    <option *ngFor="let category of categoryList" value={{category.categoryId}}>
+                        {{category.name}}
+                    </option>
+                </select>
+                <small id="categoryError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Nombre</label>
+                <input type="text" [(ngModel)]="product.name" class="form-control form-control-sm" id="name" name="name"
+                    placeholder="Ingrese el nombre del producto" required #name="ngModel" [readOnly]="!submitBtn">
+                <small id="nameError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Estado</label>
+                <select id="sate" class="form-control form-control-sm" name="state" [(ngModel)]="product.state"
+                    [disabled]="operation != 'update'">
+                    <option value="true">ACTIVO</option>
+                    <option value="false">INACTIVO</option>
+                </select>
+                <small id="stateError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Marca</label>
+                <select id="brandName" class="form-control form-control-sm" name="brandName"
+                    [(ngModel)]="product.brand.brandId" [disabled]="!submitBtn" (change)="cleanComboboxError()">
+                    <option selected value="0">--SELECCIONE--</option>
+                    <option *ngFor="let brand of brandList" value={{brand.brandId}}>{{brand.name}}</option>
+                </select>
+                <small id="brandError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Stock</label>
+                <input type="number" min="1" [(ngModel)]="product.stock" pattern="[0-9]*"
+                    (keypress)="preventNonNumericalInput($event)" step="1" class="form-control form-control-sm"
+                    id="stock" name="stock" placeholder="Ingrese el stock del producto" [readOnly]="!submitBtn">
+                <small id="stockError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Precio Unitario</label>
+                <input type="number" min="1" [(ngModel)]="product.price" pattern="[0-9]*"
+                    (keypress)="preventNonNumericalInput($event)" step="1" class="form-control form-control-sm"
+                    id="price" name="price" placeholder="Ingrese el valor del producto" required #price="ngModel"
+                    [readOnly]="!submitBtn">
+                <small id="priceError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Proveedor</label>
+                <select id="supplierName" class="form-control form-control-sm" name="supplierName"
+                    [(ngModel)]="product.supplier.supplierId" [disabled]="!submitBtn" (change)="cleanComboboxError()">
+                    <option selected value="0">--SELECCIONE--</option>
+                    <option *ngFor="let supplier of supplierList" value={{supplier.supplierId}}>
+                        {{supplier.name}}
+                    </option>
+                </select>
+                <small id="supplierError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Imagen</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="product.imagePath" id="imagePath"
+                    name="imagePath" placeholder="Ingrese url de la imagen" [readOnly]="!submitBtn">
+                <small id="imagePathError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <br>
+                <button class="btn btn-success mt-2" (click)="showImageFrame()">Ver imagen</button>
+            </div>
+        </div>
+
+        <div id="containerImg" *ngIf="showImage"></div>
+
+        <div id="box" *ngIf="showImage">
+            <img src="../../assets/xButton.png" id="xButton" (click)="showImageFrame()" />
+            <img [src]="product.imagePath" id="imageFrame">
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-sm-6">
+                <button id="saveButton" *ngIf="submitBtn" type="button" (click)="onSubmit()"
+                    class="btn btn-primary w-25">{{saveButtonText}}</button>
+                <button type="button" class="btn btn-primary w-25" *ngIf="!submitBtn"
+                    (click)="changeButtonState()">{{saveButtonText}}</button>
+                <a routerLink="/main" class="btn btn-danger w-25 ml-2">CANCELAR</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div *ngIf="list" id="componentContainer">
+    
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Valor Unitario</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="tableRow">
+            <tr *ngFor="let product of productList">
+                <td>{{product.productId}}</td>
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td><a class="btn btn-primary" routerLink="/main/product/view/{{product.productId}}">Ver información</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

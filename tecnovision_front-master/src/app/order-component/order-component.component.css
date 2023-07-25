@@ -1,0 +1,37 @@
+#OrderComponentContainer {
+    overflow-y: auto;
+    height: 55vh;
+}
+
+#formBackground {
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: gray;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.paymentForm {
+    top: 15vh;
+    left: 20vw;
+    position: absolute;
+    opacity: 1;
+    z-index: 1;
+    height: 50vh;
+    width: 60vw;
+}
+
+#keyboard {
+    position: absolute;
+    left: 82%;
+    top: 40%;
+}
+
+#passwordViewer {
+    position: absolute;
+    right: 6.5%;
+    top: 28%;
+}

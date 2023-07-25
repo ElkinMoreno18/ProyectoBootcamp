@@ -1,0 +1,61 @@
+<div class="card-header text-center bg-dark text-white">{{title}}</div>
+<div *ngIf="!list" class="card-body bg-light" id="componentContainer">
+    <form enctype="multipart/form-data" id="categoryForm">
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Nombre</label>
+                <input type="text" [(ngModel)]="category.name" class="form-control form-control-sm" id="name" name="name" placeholder="Ingrese el nombre de la Categoria" required #name="ngModel" [readOnly]="!submitBtn" />
+                <small id="nameError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Estado</label>
+                <select id="state" class="form-control form-control-sm" name="state" [(ngModel)]="category.state" [disabled]="operation != 'update'">
+                    <option value="true">ACTIVO</option>
+                    <option value="false">INACTIVO</option>
+                </select>
+                <small id="stateError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Descuento</label>
+                <select id="discountName" class="form-control form-control-sm" name="discountName" [(ngModel)]="category.discount.discountId" [disabled]="!submitBtn">
+                    <option value="0">--SELECCIONE--</option>
+                    <option *ngFor="let discount of discountList" value={{discount.discountId}}>
+                        {{discount.value * 100 | number : '1.0-0'}} %</option>
+                </select>
+                <small id="discountError" class="form-text text-danger"></small>
+
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-sm-6">
+                <button id="saveButton" *ngIf="submitBtn" type="button" class="btn btn-primary w-25" (click)="onSubmit()">{{saveButtonText}}</button>
+                <button type="button" class="btn btn-primary w-25" *ngIf="!submitBtn" (click)="changeButtonState()">{{saveButtonText}}</button>
+                <a routerLink="/main" class="btn btn-danger w-25 ml-2">CANCELAR</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div *ngIf="list" id="componentContainer">
+
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="tableRow">
+            <tr *ngFor="let category of categoryList">
+                <td>{{ category.categoryId }}</td>
+                <td>{{ category.name }}</td>
+                <td><a class="btn btn-primary" routerLink="/main/category/view/{{category.categoryId}}">Ver
+                        información</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,94 @@
+<div class="card-header text-center bg-dark text-white">{{title}}</div>
+<div *ngIf="!list" class="card-body bg-light" id="componentContainer">
+    <form enctype="multipart/form-data" id="supplierForm">
+        <div class="from-group row">
+            <div class="col-4">
+                <label class="col-form-label">NIT</label>
+                <input type="text" [(ngModel)]="supplier.nit" class="form-control form-control-sm" id="nit" name="nit"
+                    placeholder="Ingrese el nit del proveedor" required #nit="ngModel" [readOnly]="!submitBtn" />
+                <small id="nitError" class="form-text text-danger"></small>
+            </div>
+
+            <div class="col-4">
+                <label class="col-form-label">Nombre</label>
+                <input type="text" [(ngModel)]="supplier.name" class="form-control form-control-sm" id="name"
+                    name="name" placeholder="Ingrese el nombre del proveedor" required #name="ngModel"
+                    [readOnly]="!submitBtn">
+                <small id="nameError" class="form-text text-danger"></small>
+            </div>
+
+            <div class="col-4">
+                <label class="col-form-label pt-2">Teléfono</label>
+                <input type="text" [(ngModel)]="supplier.phone" class="form-control form-control-sm" id="phone"
+                    name="phone" placeholder="Ingrese el teléfono del proveedor" required #phone="ngModel"
+                    [readOnly]="!submitBtn">
+                <small id="phoneError" class="form-text from-control-sm text-danger"></small>
+            </div>
+        </div>
+
+        <div class="from-group row">
+
+            <div class="col-4">
+                <label class="col-form-label pt-2">Correo Electrónico</label>
+                <input type="text" [(ngModel)]="supplier.email" class="form-control form-control-sm" id="email"
+                    name="email" placeholder="Ingrese el e-mail del proveedor" required #email="ngModel"
+                    [readOnly]="!submitBtn">
+                <small id="emailError" class="form-text text-danger"></small>
+            </div>
+
+            <div class="col-4">
+                <label class="col-form-label pt-2">Ciudad</label>
+                <select id="city" class="form-control form-control-sm" name="city" [(ngModel)]="supplier.city.cityId"
+                    [disabled]="!submitBtn">
+                    <option value="0">--SELECCIONE--</option>
+                    <option *ngFor="let city of cities" value={{city.cityId}}>{{city.cityName}}</option>
+                </select>
+                <small id="cityError" class="form-text text-danger"></small>
+            </div>
+
+            <div class="col-4">
+                <label class="col-form-label">Estado</label>
+                <select id="state" class="form-control form-control-sm" name="state" [(ngModel)]="supplier.state" [disabled]="operation != 'update'">
+                    <option value="true">ACTIVO</option>
+                    <option value="false">INACTIVO</option>
+                </select>
+                <small id="stateError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-sm-6">
+                <button id="saveButton" *ngIf="submitBtn" type="button" class="btn btn-primary w-25"
+                    (click)="onSubmit()">{{saveButtonText}}</button>
+                <button type="button" class="btn btn-primary w-25" *ngIf="!submitBtn"
+                    (click)="changeButtonState()">{{saveButtonText}}</button>
+                <a routerLink="/main" class="btn btn-danger w-25 ml-2">CANCELAR</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div *ngIf="list" id="componentContainer">
+    
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NIT</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="tableRow">
+            <tr *ngFor="let supplier of supplierList">
+                <td>{{ supplier.supplierId }}</td>
+                <td>{{ supplier.nit }}</td>
+                <td>{{ supplier.name }}</td>
+                <td>{{ supplier.email }}</td>
+                <td><a class="btn btn-primary" routerLink="/main/supplier/view/{{supplier.supplierId}}">Ver
+                        información</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

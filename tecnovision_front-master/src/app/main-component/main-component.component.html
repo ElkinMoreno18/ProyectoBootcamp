@@ -1,0 +1,145 @@
+<div class="bg-light py-1 container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <img class="img-fluid" src="../assets/logo.png" alt="Logo Menu Tecnovision">
+        </div>
+        <div class="position-absoulte mr-3">
+            <button class="btn btn-dark" (click)="logOut()">Cerrar Sesión</button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="from-group row">
+        <div *ngIf="flag" class="col-sm" id="sidebar-wrapper">
+            <div class="list-group list-group-flush" id="side">
+                <nav id="menu">
+                    <ul class="menu text-center list-inline py-2">
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark w-100">ADMINISTRADOR</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/administrator/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/administrator/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">CLIENTE</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/customer/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">PRODUCTO</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/product/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/product/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">PEDIDO</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/order/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">CATEGORIA</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/category/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/category/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">DESCUENTO</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/discount/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/discount/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">SERVICIO</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/service/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/service/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">PROVEEDOR</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/supplier/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/supplier/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">MARCA</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/brand/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/brand/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div *ngIf="!flag" class="col-sm" id="sidebar-wrapper">
+            <div class="list-group list-group-flush" id="side">
+                <nav id="menu">
+                    <ul class="menu text-center list-inline py-2">
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">CLIENTE</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a [routerLink]="customerViewRoute" class="btn border border-2 bg-dark ">Consultar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="text-center list-inline py-1">
+                            <a class="op btn btn-dark  w-100">PEDIDO</a>
+                            <ul class="submenu text-center list-inline">
+                                <li>
+                                    <a routerLink="/main/order/save" class="btn border border-2 bg-dark ">Agregar</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/main/order/list" class="btn border border-2 bg-dark ">Listar</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="container mt-1">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

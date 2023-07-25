@@ -1,0 +1,114 @@
+<div class="card-header text-center bg-dark text-white">{{title}}</div>
+<div *ngIf="!list" class="card-body bg-light" id="componentContainer">
+    <form enctype="multipart/form-data" id="administratorForm">
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Documento</label>
+                <input type="number" [(ngModel)]="administrator.document" class="form-control form-control-sm"
+                    id="document" name="document" placeholder="Ingrese el No. de documento del administrador"
+                    [readOnly]="!submitBtn" />
+                <small id="documentError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Correo Electrónico</label>
+                <input type="text" [(ngModel)]="administrator.email" class="form-control form-control-sm" id="email"
+                    name="email" placeholder="Ingrese el e-mail del administrador" required #email="ngModel"
+                    [readOnly]="!submitBtn" />
+                <small id="emailError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Estado</label>
+                <select id="state" class="form-control form-control-sm" name="state" [(ngModel)]="administrator.state" [disabled]="operation != 'update'">
+                    <option value="true">ACTIVO</option>
+                    <option value="false">INACTIVO</option>
+                </select>
+                <small id="stateError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Nombre</label>
+                <input type="text" [(ngModel)]="administrator.name" class="form-control form-control-sm" id="name"
+                    name="name" placeholder="Ingrese el nombre del administrator" [readOnly]="!submitBtn">
+                <small id="nameError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Apellido</label>
+                <input type="text" [(ngModel)]="administrator.lastName" class="form-control form-control-sm"
+                    id="lastName" name="lastName" placeholder="Ingrese el nombre del administrator"
+                    [readOnly]="!submitBtn">
+                <small id="lastNameError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Teléfono</label>
+                <input type="number" min="0" [(ngModel)]="administrator.phone" class="form-control form-control-sm"
+                    id="phone" name="phone" placeholder="Ingrese el teléfono del administrador"
+                    [readOnly]="!submitBtn" />
+                <small id="phoneError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label class="col-form-label">Dirección</label>
+                <input type="text" [(ngModel)]="administrator.address" class="form-control form-control-sm" id="address"
+                    name="address" placeholder="Ingrese la dirección del administrador" [readOnly]="!submitBtn" />
+                <small id="addressError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+
+                <label class="col-form-label">Contraseña</label>
+                <input type="text" [(ngModel)]="administrator.password" class="form-control form-control-sm"
+                    id="password" name="password" placeholder="Ingrese la contraseña del administrador"
+                    [readOnly]="!submitBtn" />
+                <small id="passwordError" class="form-text text-danger"></small>
+            </div>
+            <div class="col-4">
+                <label class="col-form-label">Ciudad</label>
+                <select id="city" class="form-control form-control-sm" name="city"
+                    [(ngModel)]="administrator.city.cityId" [disabled]="!submitBtn">
+                    <option value="0">--SELECCIONE--</option>
+                    <option *ngFor="let city of cities" value={{city.cityId}}>{{city.cityName}}</option>
+                </select>
+                <small id="cityError" class="form-text text-danger"></small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <button id="saveButton" *ngIf="submitBtn" type="button" class="btn btn-primary w-25"
+                    (click)="onSubmit()">{{saveButtonText}}</button>
+                <button type="button" class="btn btn-primary w-25" *ngIf="!submitBtn"
+                    (click)="changeButtonState()">{{saveButtonText}}</button>
+                <a routerLink="/main" class="btn btn-danger w-25 ml-2">CANCELAR</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div *ngIf="list" id="componentContainer">
+    
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody class="tableRow">
+            <tr *ngFor="let administrator of administratorList">
+                <td>{{administrator.administratorId}}</td>
+                <td>{{administrator.document}}</td>
+                <td>{{administrator.name + " " + administrator.lastName}}</td>
+                <td>{{administrator.phone}}</td>
+                <td>{{administrator.email}}</td>
+                <td><a class="btn btn-primary"
+                        routerLink="/main/administrator/view/{{administrator.administratorId}}">Ver información</a>
+            </tr>
+        </tbody>
+    </table>
+</div>

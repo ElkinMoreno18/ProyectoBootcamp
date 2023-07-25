@@ -1,0 +1,41 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: tecnovision_backend-master
+  datasource:
+    url: jdbc:mysql://localhost:33060/tecnovision?serverTimezone=America/Bogota&userSSL=false
+    username: root
+    password: Losdelsur18
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          batch_size: 30
+          generate_statistics: false
+          order_inserts: true
+    hibernate:
+      ddl-auto: update
+  output:
+    ansi:
+      enabled: always
+
+hibernate:
+  cache:
+    use_second_level_cache: true
+    region:
+      factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+    provider_class: net.sf.ehcache.hibernate.EhCacheProvider
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+
+

@@ -1,0 +1,24 @@
+body .tableRow tr:hover {
+    background-color: #02d1d8;
+    color: white;
+}
+
+body {
+    overflow: hidden;
+}
+
+#componentContainer {
+    overflow-y: auto;
+    height: 65vh;
+}
+
+.pie {
+    clear: both;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 11%;
+    text-align: center;
+    width: 100%;
+    background: white;
+}
